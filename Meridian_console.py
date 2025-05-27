@@ -322,7 +322,7 @@ def get_split_ip(text):  # テキストからIPアドレスを抽出
         return ip.split(".")
 
 def is_valid_ip(ip):  # IPアドレスの書式確認
-    parts = ip.split(".")
+    parts = get_split_ip(ip)
     return (
         len(parts) == 4 and
         all(p.isdigit() and 0 <= int(p) <= 255 for p in parts)
