@@ -1287,12 +1287,12 @@ def meridian_loop():
 # [ 1-3 ] : 送信UDPデータのターミナル表示
                 if mrd.flag_disp_send:
                     mrd.flag_disp_send = 1
-                    print('send:'+' '.join(map(str, mrd.s_meridim)))
+                    print('send:  ' + ' '.join(f"0x{int(np.uint16(val)) & 0xFFFF:04X}" for val in mrd.s_meridim))
 
 # [ 1-4 ] : 受信UDPデータのターミナル表示
                 if mrd.flag_disp_rcvd:
                     mrd.flag_disp_rcvd = 1
-                    print('rcvd:'+' '.join(map(str, mrd.r_meridim)))
+                    print('rcvd:  ' + ' '.join(f"0x{val & 0xFFFF:04X}" for val in mrd.r_meridim))
 
 # ------------------------------------------------------------------------
 # [ 2 ] : 受信データのチェック
