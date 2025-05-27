@@ -309,6 +309,18 @@ def get_udp_send_ip():  # コマンドライン引数が提供されているか
         return UDP_SEND_IP_DEF  # デフォルトのIPアドレス(またはエラーメッセージ)
 
 
+def get_split_ip(text):  # テキストからIPアドレスを抽出
+    # ホスト名ならIPアドレスに変換、IPアドレスならそのまま返す
+    try:
+        # すでにIPアドレス形式なら何もせず返す
+        socket.inet_aton(text)
+        # inet_atonが通ればIPv4アドレス
+        return text.split(".")
+    except OSError:
+        # ホスト名の場合は名前解決
+        ip = socket.gethostbyname(text)
+        return ip.split(".")
+
 def is_valid_ip(ip):  # IPアドレスの書式確認
     parts = ip.split(".")
     return (
